@@ -27,10 +27,25 @@ A Python utility that automatically renames PDF files based on their embedded me
 - **User Feedback**: Detailed console output showing processing status and summary statistics
 - **Interactive Mode**: Prompts for directory path and options
 
+## Project Structure
+
+```
+-batch-PDF-file-rename/
+├── pdf_renamer.py                              # Command-line script (recommended)
+├── backup_pdfs.py                              # Backup utility script
+├── PDF_file_rename_based_on_PDF_titles.ipynb  # Jupyter notebook version
+├── requirements.txt                            # Python dependencies
+├── README.md                                   # This file
+├── USAGE_GUIDE.md                             # Detailed usage instructions
+├── SECURITY.md                                # Security documentation
+├── LICENSE                                     # MIT License
+└── .gitignore                                 # Git ignore rules
+```
+
 ## Requirements
 
 - Python 3.6+
-- PyMuPDF (fitz)
+- PyMuPDF (fitz) >= 1.23.0
 
 ## Installation
 
@@ -50,9 +65,48 @@ Or install directly:
 pip install PyMuPDF
 ```
 
+## Quick Start
+
+**Important: Always create a backup first!**
+
+```bash
+# 1. Create backup
+python backup_pdfs.py --source /path/to/pdfs
+
+# 2. Preview changes (dry run)
+python pdf_renamer.py --directory /path/to/pdfs
+
+# 3. If preview looks good, rename files
+python pdf_renamer.py --directory /path/to/pdfs --no-dry-run
+```
+
+See [USAGE_GUIDE.md](USAGE_GUIDE.md) for detailed instructions and best practices.
+
 ## Usage
 
-### Running in Jupyter Notebook or Google Colab
+### Method 1: Command-Line Script (Recommended)
+
+**Check dependencies:**
+```bash
+python pdf_renamer.py --check-deps
+```
+
+**Dry run (preview changes):**
+```bash
+python pdf_renamer.py --directory /path/to/pdfs
+```
+
+**Actually rename files:**
+```bash
+python pdf_renamer.py --directory /path/to/pdfs --no-dry-run
+```
+
+**All available options:**
+```bash
+python pdf_renamer.py --help
+```
+
+### Method 2: Jupyter Notebook
 
 1. Open `PDF_file_rename_based_on_PDF_titles.ipynb` in Jupyter Notebook or upload to Google Colab
 2. Run the first cell to import required libraries
@@ -61,6 +115,17 @@ pip install PyMuPDF
    - Choose whether to run in dry-run mode (recommended first time)
    - Choose whether to automatically number duplicate filenames
 4. Review the output and check the generated log file
+
+### Backup Utility
+
+**Always backup before renaming:**
+```bash
+# Create timestamped backup
+python backup_pdfs.py --source /path/to/pdfs
+
+# Custom backup location
+python backup_pdfs.py --source /path/to/pdfs --backup /path/to/backup
+```
 
 ### Example Output
 
